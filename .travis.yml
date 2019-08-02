@@ -6,16 +6,19 @@ branches:
 install:
   - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.52/hugo_0.52_Linux-64bit.deb
   - sudo dpkg -i /tmp/hugo.deb
+  - mkdir ~/.ssh
+  - echo $DEPLOY_KEY > ~/.ssh/id_rsa.pub
+  - chmod -c 644 ~/.ssh/id_rsa.pub
 before_script:
   - git config --global user.name 'tealinuxos via Travis CI'
-  - git config --global user.email 'mailpakgasing@gmail.com'
+  - git config --global user.email 'akhmadbasir5@gmail.com'
 script:
   - hugo
   - ls -al public
   - cd public
   - echo "tealinuxos.org" > CNAME
   - git init
-  - git remote add origin https://github.com/tealinuxos/tealinuxos.github.io.git
+  - git remote add origin $DEPLOY_REPO
   - git add -A .
   - git commit -m 'Site updated'
   - git push --force --quiet origin master
