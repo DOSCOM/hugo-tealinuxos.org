@@ -13,17 +13,9 @@ script:
   - hugo
   - ls -al public
   - cd public
+  - echo "tealinuxos.org" > CNAME
   - git init
   - git remote add origin https://github.com/tealinuxos/tealinuxos.github.io.git
   - git add -A .
   - git commit -m 'Site updated'
-#  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then git push --force --quiet origin master; fi
-
-#after_success:
-#  - echo "now in directory : $(pwd)"
-#  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then cd public; fi
-#  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then git init; fi
-#  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then git remote add origin https://github.com/tealinuxos/tealinuxos.github.io.git; fi
-#  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then git add -A .; fi
-#  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then git commit -m 'Site updated'; fi
-#  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then git push --force --quiet origin master; fi
+  - git push --force --quiet origin master
