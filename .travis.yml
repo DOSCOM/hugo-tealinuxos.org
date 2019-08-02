@@ -11,7 +11,14 @@ before_script:
   - git config --global user.email 'mailpakgasing@gmail.com'
 script:
   - hugo
-  - ls -al
+  - ls -al public
+  - cd public
+  - git init
+  - git remote add origin https://github.com/tealinuxos/tealinuxos.github.io.git; fi
+  - git add -A .; fi
+  - git commit -m 'Site updated'; fi
+#  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then git push --force --quiet origin master; fi
+
 #after_success:
 #  - echo "now in directory : $(pwd)"
 #  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then cd public; fi
