@@ -14,9 +14,9 @@ script:
   - ls -al public
   - cd public
   - git init
-  - git remote add origin https://github.com/tealinuxos/tealinuxos.github.io.git; fi
-  - git add -A .; fi
-  - git commit -m 'Site updated'; fi
+  - git remote add origin https://github.com/tealinuxos/tealinuxos.github.io.git
+  - git add -A .
+  - git commit -m 'Site updated'
 #  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then git push --force --quiet origin master; fi
 
 #after_success:
