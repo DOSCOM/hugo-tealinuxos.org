@@ -7,9 +7,8 @@ before_deploy:
 script:
   - mkdir .deploy
   - git clone $TARGET_REPO .deploy
-  - cd .deploy
-  - hugo
-  - ls -al public
+  - cd .deploy && pwd && hugo
+  - ls -al .deploy/public
 deploy:
   skip_cleanup: true
   keep_history: true
