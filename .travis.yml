@@ -1,12 +1,11 @@
 install:
   - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.52/hugo_0.52_Linux-64bit.deb
   - sudo dpkg -i /tmp/hugo.deb
-before_deploy:
-  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-  - git tag $TRAVIS_TAG
 script:
   - hugo
 before_deploy:
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
   - cd public
   - touch CNAME
   - echo $DOMAIN > CNAME
@@ -19,7 +18,7 @@ deploy:
   github_token: $TEALINUXOS_ACCESS_TOKEN
   repo: $REPO_OWNER/$REPO_NAME
   name: $REPO_OWNER
-  email: akhmadbasir5@gmail.com
+  email: $EMAIL_OWNER
   provider: pages
   local_dir: public
   target_branch: gh-pages
