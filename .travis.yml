@@ -5,6 +5,9 @@ before_deploy:
   - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
   - git tag $TRAVIS_TAG
 script:
+  - mkdir .deploy
+  - git clone $TARGET_REPO .deploy
+  - cd .deploy
   - hugo
   - ls -al public
 deploy:
@@ -15,9 +18,9 @@ deploy:
   name: $REPO_OWNER
   email: akhmadbasir5@gmail.com
   provider: pages
-  local_dir: public
+  local_dir: .deploy/public
   on:
-    branch: master
+    branch: gh-pages
 after_deploy:
   - git clone $TARGET_REPO product
   - cd product
