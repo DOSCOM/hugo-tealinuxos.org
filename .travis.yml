@@ -7,7 +7,6 @@ install:
   - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.52/hugo_0.52_Linux-64bit.deb
   - sudo dpkg -i /tmp/hugo.deb
   - echo $DEPLOY_KEY > ~/.ssh/id_rsa.pub
-  - cat $(find ~ -name id_rsa.pub)
   - chmod -c 644 ~/.ssh/id_rsa.pub
 before_script:
   - git config --global user.name 'tealinuxos via Travis CI'
@@ -19,6 +18,7 @@ script:
   - echo "tealinuxos.org" > CNAME
   - git init
   - git remote add origin $DEPLOY_REPO
+  - git fetch && git pull --commit "merge from HEAD" origin master
   - git add -A .
   - git commit -m 'Site updated'
-#   - git push --force --quiet origin master
+  - git push --force --quiet origin master
