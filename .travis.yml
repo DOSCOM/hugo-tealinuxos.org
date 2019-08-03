@@ -1,21 +1,25 @@
 install:
   - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.52/hugo_0.52_Linux-64bit.deb
   - sudo dpkg -i /tmp/hugo.deb
-# ---------  
 before_deploy:
-  # Set up git user name and tag this commit
-  - git config --global user.name "TeaLinuxOS - Travis Pipeline"
-  - git config --global user.email "akhmadbasir5@gmail.com"
-# ---------
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
 script:
-  - hugo  
-# ---------
+  - hugo
+  - ls -al public
 deploy:
-  provider: pages
   skip_cleanup: true
-  github_token: $GH_TOKEN  # Set in the settings page of your repository, as a secure variable
   keep_history: true
+  github_token: $TEALINUXOS_ACCESS_TOKEN
+  repo: $REPO_OWNER/$REPO_NAME
+  name: $REPO_OWNER
+  email: akhmadbasir5@gmail.com
+  provider: pages
+  local_dir: public
   on:
     branch: master
-  local_dir: public
-  repo: $REPO
+after_deploy:
+  - git clone $TARGET_REPO product
+  - cd product
+  - git log --oneline --graph -n 20
+  
