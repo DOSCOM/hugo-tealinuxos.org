@@ -7,7 +7,6 @@ before_deploy:
 script:
   - hugo
 before_deploy:
-  - mkdir public
   - cd public
   - touch CNAME
   - echo $DOMAIN > CNAME
