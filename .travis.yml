@@ -16,6 +16,7 @@ deploy:
   email: akhmadbasir5@gmail.com
   provider: pages
   local_dir: public
+  target_branch: gh-pages
   on:
     branch: master
 after_deploy:
