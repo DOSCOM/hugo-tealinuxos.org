@@ -9,6 +9,7 @@ script:
 deploy:
   skip_cleanup: true
   keep_history: true
+  allow_empty_commit: true
   github_token: $TEALINUXOS_ACCESS_TOKEN
   repo: $REPO_OWNER/$REPO_NAME
   name: $REPO_OWNER
@@ -16,7 +17,7 @@ deploy:
   provider: pages
   local_dir: public
   on:
-    branch: gh-pages
+    branch: master
 after_deploy:
   - git clone $TARGET_REPO product
   - cd product
